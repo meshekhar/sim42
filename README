@@ -1,4 +1,4 @@
-Simulator42 is an open source process simulator project with the goal of providing an affordable and accessible chemical process simulator to the chemical engineering community.
+Sim42 is an open source process simulator project with the goal of providing an affordable and accessible chemical process simulator to the chemical engineering community.
 
 Some interesting features of the project:
  * It is being written in the Python language.
@@ -6,3 +6,30 @@ Some interesting features of the project:
  * The flow sheet solver can propagate partial information both backward and forward through the flow sheet. This feature allows many complex problems to be solved without iterative calculation of recycle loops. Consistency checks are used to avoid unintended over specification of problems.
  * A distillation column employing a Russell inside/out algorithm and capable of solving complex pump around and side stripper problems has been implemented.
  * Several user interfaces are already available or being developed for Sim42, including a basic command line interface, a graphical interface based on wxWindows, a web browser based interface/server and a professional commercial interface.
+
+
+## Example of VLE Flash:
+
+Step1: from ollin.Administrator.AdmOllin import Ollin
+  Expected output:
+       Loading Data Base data.db 
+       \..........
+       
+Step2: PR=Ollin.AddModel("PR","PR")
+
+Step3: Ollin.Add(["ETHANE","PROPANE","N-BUTANE","N-PENTANE","N-HEXANE"],"PR")
+  Expected output:
+        component 100 ETHANE was add to PengRobinson 
+        component 132 PROPANE was add to PengRobinson 
+        component 181 N-BUTANE was add to PengRobinson 
+        component 223 N-PENTANE was add to PengRobinson 
+        component 271 N-HEXANE was add to PengRobinson
+        
+Step4: S1=Ollin.AddCase("S1")
+
+Step5: S1.SetX([0.05,0.15,0.25,0.20,0.35])
+Step6: S1.FracVap(0.5)
+Step7: S1.P(101.325)
+Step8: Ollin.Solve()
+
+Results: Ollin.Resumen()
